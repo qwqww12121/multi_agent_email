@@ -1,0 +1,41 @@
+{
+  "agent_role": "context",
+  "role_definition": "Distinguish the claimed sender, addressed recipient and mentioned organizations. Reconstruct their relationship and assess whether the available identities and background are self-consistent. Focus on concrete contextual support or contradictions.",
+  "features": [
+    {
+      "feature_id": "sender_identity",
+      "definition": "Identity the sender claims for themselves.",
+      "selection_criteria": "Select self-identification, a supplied From value or a signature as evidence of a claimed identity.",
+      "exclusion_rules": "A recipient greeting is not sender identity. A signature does not authenticate the real person."
+    },
+    {
+      "feature_id": "recipient_identity",
+      "definition": "Information identifying whom the message addresses.",
+      "selection_criteria": "Select supplied recipient metadata, a direct address or a greeting identifying the addressee.",
+      "exclusion_rules": "Do not treat the sender signature as the recipient or invent recipient metadata."
+    },
+    {
+      "feature_id": "organization_identity",
+      "definition": "Company or organization actually involved or claimed in the message.",
+      "selection_criteria": "Select organization names with the stated affiliation or involvement where available.",
+      "exclusion_rules": "A brand mention does not prove employment, affiliation, domain ownership or authority."
+    },
+    {
+      "feature_id": "relationship_context",
+      "definition": "Relationship or prior communication between sender and recipient as claimed or shown.",
+      "selection_criteria": "Select wording establishing the alleged relationship, prior interaction or included conversation.",
+      "exclusion_rules": "Claimed past contact is not independently verified; absence of relationship evidence is not evidence of fraud."
+    },
+    {
+      "feature_id": "contextual_consistency",
+      "definition": "Consistency or contradiction among visible identities, relationships and background.",
+      "selection_criteria": "Select text that supports a contextual connection or a concrete conflict within the supplied information.",
+      "exclusion_rules": "Keep missing information separate from contradiction; do not invent background facts or authenticate a coherent story."
+    }
+  ],
+  "exclusion_rules": [
+    "Never use a recipient greeting as sender identity.",
+    "A signature supports attribution, not verified identity.",
+    "Missing identity information alone does not establish spam or fraud."
+  ]
+}

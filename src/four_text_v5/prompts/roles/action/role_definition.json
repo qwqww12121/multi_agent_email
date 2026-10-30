@@ -1,0 +1,35 @@
+{
+  "agent_role": "action",
+  "role_definition": "Analyze what the current sender asks the recipient to do, the object and destination of that behavior, and potential risks of complying. Assess whether the request is reasonable in the visible communication context. Focus on the action perspective.",
+  "features": [
+    {
+      "feature_id": "recipient_action",
+      "definition": "Operation the email asks the recipient to perform.",
+      "selection_criteria": "Select a current explicit or contextually supported request and its operative wording.",
+      "exclusion_rules": "Sender-completed actions, quoted-only instructions and topic mentions are not automatically current recipient requests."
+    },
+    {
+      "feature_id": "sensitive_action",
+      "definition": "Request involving credentials, accounts, financial operations or personal information.",
+      "selection_criteria": "Identify the requested operation and the sensitive object it actually involves.",
+      "exclusion_rules": "A payment topic, account notice or security reminder without a request does not establish a sensitive action."
+    },
+    {
+      "feature_id": "abnormal_instruction",
+      "definition": "An unreasonable instruction or an operation inconsistent with a normal business process.",
+      "selection_criteria": "Select the requested operation that supports the abnormality judgment. Use the supplied context and general knowledge of reasonable procedures; the email need not explicitly state the policy being bypassed.",
+      "exclusion_rules": "Do not invent a specific organization policy or hidden facts. Missing process information alone is not evidence of abnormality."
+    },
+    {
+      "feature_id": "action_consequence",
+      "definition": "Potential risks arising from carrying out the requested operation, supported by the action and its context.",
+      "selection_criteria": "Select the original request or contextual wording supporting a potential risk. The email need not explicitly name the risk; reason from what complying would involve, while distinguishing plausible risk from a confirmed outcome.",
+      "exclusion_rules": "Do not invent missing facts or treat a possible risk as proven harm. A generic link or attachment alone does not establish malware or account theft."
+    }
+  ],
+  "exclusion_rules": [
+    "Ordinary requests can be legitimate.",
+    "Links and attachments alone are insufficient evidence.",
+    "Keep current recipient instructions separate from sender actions and quoted history."
+  ]
+}

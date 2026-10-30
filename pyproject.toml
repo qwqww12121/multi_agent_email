@@ -3,17 +3,20 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "four-text-mail-v4"
-version = "0.4.4"
-requires-python = ">=3.11"
-description = "Base completion role prompts with constrained JSON and native candidate scores"
-dependencies = ["torch>=2.2,<3", "jsonschema==4.25.1", "lm-format-enforcer==0.11.3"]
+name = "four-text-v5"
+version = "0.5.1"
+description = "Role-driven native label scoring with independent evidence diagnostics"
+requires-python = ">=3.10"
+dependencies = ["torch>=2.2"]
 
 [project.optional-dependencies]
-model = ["transformers==4.57.1", "accelerate==1.11.0"]
+model = ["transformers==4.57.1", "accelerate>=1.0", "lm-format-enforcer==0.11.3"]
 
 [project.scripts]
-four-text-v4 = "four_text_v4.cli:main"
+four-text-v5 = "four_text_v5.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"four_text_v5.prompts" = ["common/*.txt", "roles/*/*.json"]

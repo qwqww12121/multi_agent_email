@@ -1,0 +1,4 @@
+{
+  "status": "passed",
+  "scope": "HTML JavaScript parses and five cohort selections produce expected metric cells; not a rendered-browser visual test"
+}

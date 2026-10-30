@@ -1,22 +1,29 @@
-"""Export readable role templates and separate decoder/validator schemas; no examples."""
+"""Export review copies with input placeholders, never demonstration emails/answers."""
 import json
-from pathlib import Path
 import sys
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT/'src'))
-from four_text_v4.contracts import ROLES
-from four_text_v4.contracts.json_schema import report_schema
-from four_text_v4.contracts.decoder_schema import decoder_schema
-from four_text_v4.experts.cards import role_card, PROMPT_VERSION
-from four_text_v4.experts.base_prompt import BOS, ANSWER_MARKER, report_prefix
-folder = ROOT/'prompts'
-folder.mkdir(exist_ok=True)
-for role in ROLES:
-    text = (BOS + 'EMAIL SPECIALIST REPORT TASK\n<DATASET_TASK_DEFINITION>\n'
-            + role_card(role) + '\n<INPUT_SCOPE_AND_EMAIL_DATA_JSON>\nEnd email data.\n'
-            + 'Complete only the ' + role + ' report.' + ANSWER_MARKER + report_prefix(role))
-    (folder/(role+'.txt')).write_text(text, encoding='utf-8')
-    for kind, schema in [('validation',report_schema(role)), ('decoder',decoder_schema(role))]:
-        (folder/(role+'.'+kind+'.schema.json')).write_text(json.dumps(schema, ensure_ascii=False, indent=2)+'\n',encoding='utf-8')
-print(json.dumps(dict(prompt_version=PROMPT_VERSION, roles=list(ROLES), demonstrations=0,
-                     enforcement='lm-format-enforcer token mask; full schema and source checks after generation')))
+from pathlib import Path
+from string import Template
+
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'src'))
+from four_text_v5.contracts.task import ROLES
+from four_text_v5.experts.catalog import load_role,render_catalog,resource
+from four_text_v5.scoring.render import BOS
+from four_text_v5.util import digest
+
+def export(output):
+    output=Path(output);manifest={}
+    for role in ROLES:
+        config=load_role(role)
+        values=dict(role=role,role_definition=config['role_definition'],feature_catalog=render_catalog(role),
+            exclusion_rules='\n'.join('- '+s for s in config['exclusion_rules']),retry_instruction='',
+            task='${DATASET_TASK_DEFINITION}',definitions='${NATIVE_CLASS_DEFINITIONS}',
+            labels='${NATIVE_LABELS}',email='${EMAIL_INPUT_JSON}')
+        for kind in ('classification','evidence'):
+            text=BOS+Template(resource('common/'+kind+'_base.txt')).substitute(values)
+            text=text.rstrip() if kind=='classification' else text+'{"agent_role":'+json.dumps(role)+',"features":'
+            path=output/role/(kind+'.txt');path.parent.mkdir(parents=True,exist_ok=True)
+            path.write_text(text,encoding='utf8');manifest[path.relative_to(output).as_posix()]=digest(text)
+    (output/'manifest.json').write_text(json.dumps(dict(note='Generated review templates; placeholders are replaced at runtime. No demonstration email or answer.',files=manifest),indent=2),encoding='utf8')
+
+if __name__=='__main__':export(sys.argv[1] if len(sys.argv)>1 else ROOT/'design/rendered_prompts')

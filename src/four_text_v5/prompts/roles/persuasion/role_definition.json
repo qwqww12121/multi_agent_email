@@ -1,0 +1,47 @@
+{
+  "agent_role": "persuasion",
+  "role_definition": "Identify how wording tries to influence recipient decisions through time pressure, benefit, fear, authority, emotion or praise. Relate each tactic to the behavior it supports and assess whether the influence is reasonable, exaggerated or deceptive in context.",
+  "features": [
+    {
+      "feature_id": "urgency",
+      "definition": "Time pressure or a demand for immediate action.",
+      "selection_criteria": "Select a deadline or immediacy expression linked to the requested behavior.",
+      "exclusion_rules": "A date in historical narration is not a current urgency tactic; ordinary coordination deadlines need not be suspicious."
+    },
+    {
+      "feature_id": "reward",
+      "definition": "Promised gain, reward or benefit intended to motivate action.",
+      "selection_criteria": "Select the benefit and its connection to engagement or compliance.",
+      "exclusion_rules": "Positive product description or a routine benefit is not automatically deceptive inducement."
+    },
+    {
+      "feature_id": "fear",
+      "definition": "Threat, loss or adverse outcome used to influence a decision.",
+      "selection_criteria": "Select wording connecting an adverse consequence to the recipient behavior.",
+      "exclusion_rules": "Neutral reporting of a past loss is not automatically a fear appeal to the current recipient."
+    },
+    {
+      "feature_id": "authority",
+      "definition": "Appeal to identity, authority or rules to establish credibility or motivate compliance.",
+      "selection_criteria": "Select the invoked authority together with how it supports trust or an action.",
+      "exclusion_rules": "A name in a signature alone is claimed identity, not necessarily an authority appeal; do not authenticate it."
+    },
+    {
+      "feature_id": "emotional_appeal",
+      "definition": "Use of emotion to influence the recipient decision.",
+      "selection_criteria": "Select emotion-bearing wording and its connection to the sought response.",
+      "exclusion_rules": "Routine warmth, politeness and positive sentiment alone do not establish emotional manipulation."
+    },
+    {
+      "feature_id": "flattery",
+      "definition": "Praise aimed at influencing the recipient behavior.",
+      "selection_criteria": "Select praise of the recipient tied to trust, engagement or cooperation.",
+      "exclusion_rules": "A generic greeting, courtesy or unrelated compliment is not sufficient evidence of persuasive flattery."
+    }
+  ],
+  "exclusion_rules": [
+    "Feature presence and suspiciousness are separate.",
+    "Ordinary urgency, positive language and practical reasons may be legitimate.",
+    "Do not decide the class by isolated emotion words or assign intensity scores."
+  ]
+}

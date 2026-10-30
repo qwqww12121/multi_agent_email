@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "independent_reference": "scikit-learn classification/Brier/ROC-AUC and NumPy error correlation/joint errors",
+  "comparisons": 209,
+  "absolute_tolerance": 1e-12,
+  "records": 1999,
+  "independent_json_schema_valid_attempts": 28,
+  "schema_reference": "jsonschema.Draft7Validator"
+}

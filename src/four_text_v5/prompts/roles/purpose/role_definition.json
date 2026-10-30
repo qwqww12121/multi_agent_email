@@ -1,0 +1,35 @@
+{
+  "agent_role": "purpose",
+  "role_definition": "Identify the main communication goal, any commercial purpose, supported indications of deception, and the relationship between subject and content. Focus on purpose, recipient context and the proposed outcome.",
+  "features": [
+    {
+      "feature_id": "primary_purpose",
+      "definition": "Core communication goal the message seeks to achieve.",
+      "selection_criteria": "Select the passage most directly expressing the proposal, request or reason for contact.",
+      "exclusion_rules": "Do not use a greeting merely because it is first; quoted content may have a different purpose from the current message."
+    },
+    {
+      "feature_id": "commercial_promotion",
+      "definition": "Promotion of a product, service or commercial activity.",
+      "selection_criteria": "Select actual offer or promotional language, distinguishing it from incidental product discussion.",
+      "exclusion_rules": "Product mentions and wanted commercial correspondence do not establish spam or phishing."
+    },
+    {
+      "feature_id": "deceptive_intent",
+      "definition": "Visible misleading claims or contradictions supporting a deceptive communicative purpose.",
+      "selection_criteria": "Select concrete wording supporting deception in context; distinguish observable claims from inferred intent.",
+      "exclusion_rules": "Do not infer hidden intent from missing sender data, promotional wording or lack of prior-contact evidence alone."
+    },
+    {
+      "feature_id": "content_consistency",
+      "definition": "Correspondence or mismatch between supplied subject and body.",
+      "selection_criteria": "Select a passage bearing on the stated subject and the actual message goal; assess mismatch only with visible support.",
+      "exclusion_rules": "An unavailable subject prevents evaluating alignment; do not manufacture one or infer deception from absence."
+    }
+  ],
+  "exclusion_rules": [
+    "Commercial promotion is not automatically spam.",
+    "Promotion alone does not establish phishing.",
+    "Use the full subject, body and stated goal without inventing hidden motives."
+  ]
+}

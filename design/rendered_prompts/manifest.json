@@ -1,0 +1,13 @@
+{
+  "note": "Generated review templates; placeholders are replaced at runtime. No demonstration email or answer.",
+  "files": {
+    "action/classification.txt": "fe3110ef0392b6b28cbf291ecdbcfe20680c9522eb27b3f718324df367962a74",
+    "action/evidence.txt": "61b7171ffb13dc62f9f0d7a45b11027d83dfab8d3ee155227c64025407252811",
+    "context/classification.txt": "82f853844c16007312b4d87a0cee49d05957e0cd33f69f00a064ec06866ad16d",
+    "context/evidence.txt": "ec3f2b89a679c7301777b1abe7bba3273e324c21a7df5b96ce8940eeeb9ebc75",
+    "persuasion/classification.txt": "7a158863a163b9b36ad4f2a1726a6ff3e67baf9bcb960c76cf36c974699ff189",
+    "persuasion/evidence.txt": "4d1417bdff5a7f0db9e451bb64d0c9554a6a1a11919a5eb2f4c0521f8593e3b4",
+    "purpose/classification.txt": "3652bdfad0d0b64379240865dbe3aa903992063c4a9ef06147e72392b5da962e",
+    "purpose/evidence.txt": "ecf6bddef64f2994430fe025718b49bcf50809260355f3f5d2e58733fe6d1c42"
+  }
+}
