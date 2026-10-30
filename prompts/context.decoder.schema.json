@@ -1,0 +1,844 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "model-role-fields-4.0"
+      ]
+    },
+    "role": {
+      "enum": [
+        "context"
+      ]
+    },
+    "claimed_identity": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1600
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "inferred",
+            "not_present",
+            "unknown"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "current",
+            "quoted",
+            "signature",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "enum": [
+                  "subject",
+                  "sender",
+                  "body",
+                  "headers",
+                  "html_links",
+                  "attachment_metadata"
+                ]
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "field",
+              "quote"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "value",
+        "status",
+        "scope",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "claimed_relationship": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1600
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "inferred",
+            "not_present",
+            "unknown"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "current",
+            "quoted",
+            "signature",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "enum": [
+                  "subject",
+                  "sender",
+                  "body",
+                  "headers",
+                  "html_links",
+                  "attachment_metadata"
+                ]
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "field",
+              "quote"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "value",
+        "status",
+        "scope",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "communication_context": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1600
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "inferred",
+            "not_present",
+            "unknown"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "current",
+            "quoted",
+            "signature",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "enum": [
+                  "subject",
+                  "sender",
+                  "body",
+                  "headers",
+                  "html_links",
+                  "attachment_metadata"
+                ]
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "field",
+              "quote"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "value",
+        "status",
+        "scope",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "prior_context": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1600
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "inferred",
+            "not_present",
+            "unknown"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "current",
+            "quoted",
+            "signature",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "enum": [
+                  "subject",
+                  "sender",
+                  "body",
+                  "headers",
+                  "html_links",
+                  "attachment_metadata"
+                ]
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "field",
+              "quote"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "value",
+        "status",
+        "scope",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "request_context_connection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1600
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "inferred",
+            "not_present",
+            "unknown"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "current",
+            "quoted",
+            "signature",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "enum": [
+                  "subject",
+                  "sender",
+                  "body",
+                  "headers",
+                  "html_links",
+                  "attachment_metadata"
+                ]
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "field",
+              "quote"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "value",
+        "status",
+        "scope",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "inconsistencies_or_changes": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1600
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "inferred",
+            "not_present",
+            "unknown"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "current",
+            "quoted",
+            "signature",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "enum": [
+                  "subject",
+                  "sender",
+                  "body",
+                  "headers",
+                  "html_links",
+                  "attachment_metadata"
+                ]
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "field",
+              "quote"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "value",
+        "status",
+        "scope",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "missing_context": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1600
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "inferred",
+            "not_present",
+            "unknown"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "current",
+            "quoted",
+            "signature",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "enum": [
+                  "subject",
+                  "sender",
+                  "body",
+                  "headers",
+                  "html_links",
+                  "attachment_metadata"
+                ]
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "field",
+              "quote"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "value",
+        "status",
+        "scope",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "sender_domain": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1600
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "inferred",
+            "not_present",
+            "unknown"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "current",
+            "quoted",
+            "signature",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "enum": [
+                  "subject",
+                  "sender",
+                  "body",
+                  "headers",
+                  "html_links",
+                  "attachment_metadata"
+                ]
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "field",
+              "quote"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "value",
+        "status",
+        "scope",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "reply_to_domain": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1600
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "inferred",
+            "not_present",
+            "unknown"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "current",
+            "quoted",
+            "signature",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "enum": [
+                  "subject",
+                  "sender",
+                  "body",
+                  "headers",
+                  "html_links",
+                  "attachment_metadata"
+                ]
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "field",
+              "quote"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "value",
+        "status",
+        "scope",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "brand_mentions": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 1600
+          },
+          "status": {
+            "enum": [
+              "observed",
+              "inferred",
+              "not_present",
+              "unknown"
+            ]
+          },
+          "scope": {
+            "enum": [
+              "current",
+              "quoted",
+              "signature",
+              "mixed",
+              "unknown"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "maxItems": 12,
+            "items": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "enum": [
+                    "subject",
+                    "sender",
+                    "body",
+                    "headers",
+                    "html_links",
+                    "attachment_metadata"
+                  ]
+                },
+                "quote": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                }
+              },
+              "required": [
+                "field",
+                "quote"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "value",
+          "status",
+          "scope",
+          "evidence"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "header_names": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 1600
+          },
+          "status": {
+            "enum": [
+              "observed",
+              "inferred",
+              "not_present",
+              "unknown"
+            ]
+          },
+          "scope": {
+            "enum": [
+              "current",
+              "quoted",
+              "signature",
+              "mixed",
+              "unknown"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "maxItems": 12,
+            "items": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "enum": [
+                    "subject",
+                    "sender",
+                    "body",
+                    "headers",
+                    "html_links",
+                    "attachment_metadata"
+                  ]
+                },
+                "quote": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                }
+              },
+              "required": [
+                "field",
+                "quote"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "value",
+          "status",
+          "scope",
+          "evidence"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "uncertainties": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1600
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "inferred",
+            "not_present",
+            "unknown"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "current",
+            "quoted",
+            "signature",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "enum": [
+                  "subject",
+                  "sender",
+                  "body",
+                  "headers",
+                  "html_links",
+                  "attachment_metadata"
+                ]
+              },
+              "quote": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "field",
+              "quote"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "value",
+        "status",
+        "scope",
+        "evidence"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "role",
+    "claimed_identity",
+    "claimed_relationship",
+    "communication_context",
+    "prior_context",
+    "request_context_connection",
+    "inconsistencies_or_changes",
+    "missing_context",
+    "sender_domain",
+    "reply_to_domain",
+    "brand_mentions",
+    "header_names",
+    "uncertainties"
+  ],
+  "additionalProperties": false
+}

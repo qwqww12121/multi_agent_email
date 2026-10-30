@@ -12,7 +12,6 @@ records*.jsonl
 runtime.json
 status.json
 run.log
-short_followup/
 runs/
 *.safetensors
 *.bin

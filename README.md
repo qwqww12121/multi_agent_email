@@ -1,55 +1,52 @@
-# Multi-agent email analysis
+# Multi-agent email analysis - R4
 
-Four-role email analysis research code, selected by the user from **four_agent_failure_case.html**: **R5 / chat_json**, with the complete four-arm diagnostic and its actual R4 core dependency.
+**Selected version: four_text_v4r4, package 0.4.4.** Four roles (action, context, persuasion, purpose) generate full structured reports using Llama-3.1-8B Base completion prompts and constrained JSON decoding.
 
-Roles: action, purpose, persuasion, context. R5 asks each role to generate a single evidence string of at most 160 characters. R5 does not run classification, calibration, PPO or RAG. The core package retains the research implementations for full reports, native candidate-label likelihood scoring, calibration and PPO.
+The active repository contains R4 prompts and code only. R5 minimal-evidence prompts and diagnostic runners are removed from the current tree. Earlier commits remain in Git history.
 
-## Status
+## Prompt and output protocol
 
-This is a diagnostic research version with known semantic failures. Historical chat_json: 16/16 schema valid, 6/16 nonempty verbatim evidence. Exact quotation does not establish role relevance. Full reports, classification and PPO are not validated by this probe. See [version provenance](docs/VERSION.md), [R5 diagnostic notes](diagnostics/r5/README.md) and [R4 historical notes](docs/R4_HISTORY.md). Historical six-column experiments and C3 remain separate.
+Base start token -> dataset task definition -> shared evidence requirements -> role duties and field definitions -> full email -> explicit report prefix. No demonstration emails or completed example reports are inserted. Reports retain named value/status/scope/evidence fields. Generation uses LM Format Enforcer token filtering, followed by full schema and original-quote validation. Structural validity does not establish semantic correctness.
 
-## Install and check
+Read the exact exported role templates:
 
-Python >=3.11. Real inference requires sufficient GPU memory and a lawfully obtained local Llama-3.1-8B Base checkpoint. The loader enforces the historical frozen file hashes and never downloads or substitutes weights.
+- [Action](prompts/action.txt)
+- [Context](prompts/context.txt)
+- [Persuasion](prompts/persuasion.txt)
+- [Purpose](prompts/purpose.txt)
+
+Decoder and full validation schemas sit beside each template. Actual requests are assembled by src/four_text_v4/scoring/render.py. Core source, scripts, tests and prompt exports are copied byte-for-byte from the local R4 source.
+
+## Install and test
+
+Python >=3.11. Use a local, lawfully obtained Llama-3.1-8B Base checkpoint matching the frozen model-file hashes. The loader does not download or replace model weights.
 
 ```sh
 python -m venv .venv
 # Activate the environment for your operating system.
 python -m pip install -e ".[model]"
 python -m unittest discover -s tests -v
+four-text-v4 --help
 ```
 
-## Run the selected R5 diagnostic
+## Score emails with R4 reports
 
-Create a fresh existing run directory containing inputs.jsonl: one JSON object per line with string fields id and body. Include any visible subject in body. Historical diagnostics used four emails; new inputs create a new experiment and do not reproduce historical results. Do not reuse a directory containing previous outputs.
-
-PowerShell:
-
-```powershell
-$env:LLAMA_MODEL_PATH = 'D:/models/Llama-3.1-8B'
-$env:MAIL_AGENT_RUN_DIR = 'D:/runs/r5-new'
-python diagnostics/r5/probe.py
-```
-
-Linux:
+Input is JSONL containing RawEmail objects; see src/four_text_v4/contracts/email.py and the CLI help for supported fields and task/domain bindings. The command below explicitly uses the historical R4 1536-token report allowance and 18432-token context budget. The generic CLI default report allowance is 4096; do not omit the explicit 1536 value when matching the diagnostic budget.
 
 ```sh
-export LLAMA_MODEL_PATH=/models/Llama-3.1-8B
-export MAIL_AGENT_RUN_DIR=/runs/r5-new
-python diagnostics/r5/probe.py
+four-text-v4 score --input /data/emails.jsonl --output /runs/r4/scores.jsonl --model /models/Llama-3.1-8B --report-max-new-tokens 1536 --max-tokens 18432
 ```
 
-Four roles and four arms run per email. Filter records.jsonl by arm=chat_json for the selected HTML protocol. Full prompts, raw generations, tokens, stop reasons and signatures are retained without repairing failed outputs.
+The score command generates reports and computes dataset-native candidate-label likelihoods; it does not fit calibration or PPO. Full training/prediction commands exist in the core package and require separately fitted, protocol-matched artifacts. Old scores or calibration/PPO artifacts must not be reused across changed scoring signatures.
 
-Optional later QA/cloze probe: `python diagnostics/r5/short_probe.py`. It uses a different output protocol. Only after both probes complete, run `python diagnostics/r5/audit.py`; this historical auditor requires four inputs, 64 main records and 32 follow-up records.
+The historical four-dataset batch diagnostic is scripts/reference_runner.py. It retains the original remote directory layout and frozen-input reuse assumptions. See [R4 experiment notes](docs/R4_EXPERIMENT_NOTES.md) for the exact reuse-sample and run commands, historical runtime settings and limitations.
 
-## Layout
+## Validation boundaries
 
-- src/four_text_v4: R4 core, contracts, scoring and model identity checks.
-- diagnostics/r5: selected R5 prompts, runner and auditor.
-- scripts: R4 full-report utilities; reference_runner retains historical remote layout assumptions. Use the portable R5 entry above.
-- tests: report structure, quotes, model identity and generation constraints.
-- docs: version provenance and historical status.
-- RELEASE_MANIFEST.json: file SHA-256 inventory.
+Historical real-Base probe: four emails, 16 role reports; six parseable JSON outputs, ten token-limit failures, zero reports passing the full schema and quote checks. No valid final classification result was established. These are historical diagnostic findings, not new measurements or a classification accuracy of zero. The probe did not train calibration, PPO or use RAG.
 
-Datasets, raw emails, credentials, weights, caches and run outputs are excluded. Users must satisfy model and dataset license requirements. No source-code license has been selected.
+The repository contains research implementations of native-label scoring, calibration and PPO, but this R4 diagnostic does not establish their real-data effectiveness. Historical six-column experiments, C3 and method-specific RAG banks remain separate.
+
+## Publication contents
+
+Source, exact prompts/schemas, tests, dependency configuration, provenance and SHA-256 inventory are included. Datasets, raw emails, credentials, weights, historical model outputs and local QA dependencies are excluded. The local HTML containing a full real-email example is not republished. No source-code license has been selected; model and dataset licenses remain the user's responsibility.

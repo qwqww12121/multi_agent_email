@@ -1,0 +1,190 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "model-role-fields-4.0"
+    },
+    "role": {
+      "const": "context"
+    },
+    "claimed_identity": {
+      "$ref": "#/$defs/claim",
+      "description": "Who the sender presents themselves as or represents; a brand mention alone is not affiliation."
+    },
+    "claimed_relationship": {
+      "$ref": "#/$defs/claim",
+      "description": "Claimed or supported inferred relationship between sender and recipient."
+    },
+    "communication_context": {
+      "$ref": "#/$defs/claim",
+      "description": "Visible matter or situation prompting the communication."
+    },
+    "prior_context": {
+      "$ref": "#/$defs/claim",
+      "description": "Earlier contact or agreements referenced or included; distinguish a claim from an included exchange."
+    },
+    "request_context_connection": {
+      "$ref": "#/$defs/claim",
+      "description": "How the request follows from the visible relationship and situation, or a supported gap in that connection."
+    },
+    "inconsistencies_or_changes": {
+      "$ref": "#/$defs/claim",
+      "description": "Specific visible contradictions or changes. Cite both competing passages; do not invent expected procedures."
+    },
+    "missing_context": {
+      "$ref": "#/$defs/claim",
+      "description": "Missing information needed to resolve a supported context question; missing consent does not establish lack of consent."
+    },
+    "sender_domain": {
+      "$ref": "#/$defs/claim",
+      "description": "Domain in the supplied sender or From address; unknown when unavailable. Do not substitute URL domains."
+    },
+    "reply_to_domain": {
+      "$ref": "#/$defs/claim",
+      "description": "Domain in an explicitly supplied Reply-To address; unknown when unavailable."
+    },
+    "uncertainties": {
+      "$ref": "#/$defs/claim",
+      "description": "Unresolved issues limiting this role. Use supported findings when quotable; otherwise unknown/null/empty evidence. Use not_present/null/empty evidence if no relevant uncertainty is identified."
+    },
+    "brand_mentions": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "$ref": "#/$defs/claim",
+        "description": "Brands or organizations actually mentioned, without authenticating affiliation."
+      },
+      "description": "Brands or organizations actually mentioned, without authenticating affiliation."
+    },
+    "header_names": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "$ref": "#/$defs/claim",
+        "description": "Names of email header fields actually supplied in headers, not personal display names."
+      },
+      "description": "Names of email header fields actually supplied in headers, not personal display names."
+    }
+  },
+  "required": [
+    "schema_version",
+    "role",
+    "claimed_identity",
+    "claimed_relationship",
+    "communication_context",
+    "prior_context",
+    "request_context_connection",
+    "inconsistencies_or_changes",
+    "missing_context",
+    "sender_domain",
+    "reply_to_domain",
+    "uncertainties",
+    "brand_mentions",
+    "header_names"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "claim": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1600
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "inferred",
+            "not_present",
+            "unknown"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "current",
+            "quoted",
+            "signature",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/$defs/citation"
+          }
+        }
+      },
+      "required": [
+        "value",
+        "status",
+        "scope",
+        "evidence"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "observed",
+                  "inferred"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "evidence": {
+                "minItems": 1
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "value": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "citation": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string",
+          "enum": [
+            "subject",
+            "sender",
+            "body",
+            "headers",
+            "html_links",
+            "attachment_metadata"
+          ]
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "field",
+        "quote"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
